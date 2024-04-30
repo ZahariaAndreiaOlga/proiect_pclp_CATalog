@@ -1,0 +1,6 @@
+@proiect_pclp_CATalog.Server_HostAddress = http://localhost:5091
+
+GET {{proiect_pclp_CATalog.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
