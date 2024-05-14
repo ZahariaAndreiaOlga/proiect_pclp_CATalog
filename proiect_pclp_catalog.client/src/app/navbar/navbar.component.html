@@ -1,0 +1,49 @@
+<div class="d-flex flex-column flex-shrink-0 p-3">
+  <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+    <span class="fs-4">CATalog</span>
+  </a>
+  <hr>
+  <ul class="nav nav-pills flex-column mb-auto">
+    <li class="nav-item">
+      <a [routerLink]="['categories/cat']" [routerLinkActiveOptions]="{ exact: true }" class="nav-link link-body-emphasis" routerLinkActive="active">
+        Pisica
+      </a>
+    </li>
+    <li *ngIf="auth.loggedIn">
+      <a [routerLink]="['categories/user']" [routerLinkActiveOptions]="{ exact: true }" class="nav-link link-body-emphasis" routerLinkActive="active">
+        Utilizator
+      </a>
+    </li>
+    <li>
+      <a href="#" class="nav-link link-body-emphasis" routerLinkActive="active">
+        Despre
+      </a>
+    </li>
+  </ul>
+  <hr>
+  <ul class="nav nav-pills flex-column mb-auto">
+    <li *ngIf="auth.loggedIn">
+      <a [routerLink]="['categories/cat/add/']" [routerLinkActiveOptions]="{ exact: true }" class="nav-link link-body-emphasis" routerLinkActive="active">
+        Adauga pisica
+      </a>
+    </li>
+    <li *ngIf="auth.loggedIn">
+      <a [routerLink]="['categories/user/add']" [routerLinkActiveOptions]="{ exact: true }" class="nav-link link-body-emphasis" routerLinkActive="active">
+        Adauga utilizator
+      </a>
+    </li>
+  </ul>
+  <hr>
+  <ul class="nav nav-pills flex-column mb-auto">
+    <li>
+      <a [routerLink]="['login']" class="nav-link link-body-emphasis" routerLinkActive="active" *ngIf="!auth.loggedIn">
+        Logare
+      </a>
+    </li>
+    <li>
+      <a href="#" (click)="logout()" class="nav-link link-danger" *ngIf="auth.loggedIn">
+        Delogare
+      </a>
+    </li>
+  </ul>
+</div>

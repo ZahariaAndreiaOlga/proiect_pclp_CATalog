@@ -1,0 +1,41 @@
+<section class="py-5 text-center container">
+  <div class="row py-lg-5">
+    <div class="col-lg-6 col-md-8 mx-auto">
+      <h1 class="fw-light">Lista pisicilor</h1>
+      <p class="lead text-body-secondary">
+        Descoperiti o lume plina de farmec felin si companie cu varietatea noastra fermecatoare de pisici care asteapta sa fie adoptate! Fiecare dintre prietenii nostri felini adorabili are o personalitate unica si trasaturi incantatoare care cu siguranta va vor cuceri inima.
+      </p>
+    </div>
+  </div>
+</section>
+
+<p *ngIf="!catList"> Loading...</p>
+
+<div *ngIf="catList" class="album py-5 bg-body-tertiary">
+  <div class="container">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+      <div *ngFor="let cat of catList" class="col">
+        <div class="card shadow-sm">
+          <img src="https://youtooz.com/cdn/shop/products/nalathecat_photo_nologo_nh_square_02_1.jpg" class="card-img-top" alt="Poza cu {{ cat.name }}">
+          <div class="card-body">
+            <p class="card-text">
+              <strong>Nume:</strong> {{ cat.name }} <br>
+              <strong>Rasa:</strong> {{ cat.breed }} <br>
+              <strong>Varsta:</strong> {{ cat.age }} ani <br>
+              <strong>Personalitate:</strong> {{ cat.personalityTraits }} <br>
+            </p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div *ngIf="auth.loggedIn" class="btn-group">
+                <button *ngIf="cat.id !== undefined" type="button" class="btn btn-sm btn-outline-secondary" (click)="editionCat(cat.id)">Editare</button>
+                <button *ngIf="cat.id !== undefined" type="button" class="btn btn-sm btn-outline-secondary" (click)="deleteCat(cat.id)">Stergere</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+

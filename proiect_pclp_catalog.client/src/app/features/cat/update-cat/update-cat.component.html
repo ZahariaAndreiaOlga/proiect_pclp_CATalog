@@ -1,0 +1,47 @@
+
+<form #form="ngForm" (ngSubmit)="onFormSubmit()">
+  <div class="form-group mt-2">
+    <label for="name">Nume</label>
+    <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name" [(ngModel)]="model.name">
+  </div>
+  <div class="form-group mt-2">
+    <label for="breed">Rasa</label>
+    <input type="text" class="form-control" id="breed" name="breed" placeholder="Enter Breed" [(ngModel)]="model.breed">
+  </div>
+  <div class="form-group mt-2">
+    <label for="age">Varsta</label>
+    <input type="number" class="form-control" id="age" name="age" placeholder="Enter Age" [(ngModel)]="model.age">
+  </div>
+  <div class="form-group mt-2">
+    <label for="sex">Sex</label>
+    <select class="form-control" id="sex" name="sex" [(ngModel)]="model.sex">
+      <option value="Male" selected>Masculin</option>
+      <option value="Female">Feminin</option>
+    </select>
+  </div>
+  <div class="form-group mt-2">
+    <label for="size">Marime</label>
+    <input type="number" class="form-control" id="size" name="size" placeholder="Enter Size" [(ngModel)]="model.size">
+  </div>
+  <div class="form-group mt-2">
+    <label for="picture">Poza</label>
+    <input type="text" class="form-control" id="picture" name="picture" placeholder="Enter Picture URL" [(ngModel)]="model.picture">
+  </div>
+  <div class="form-group mt-2">
+    <label for="vaccinationStatus">Status Vaccinare</label>
+    <textarea class="form-control" id="vaccinationStatus" name="vaccinationStatus" placeholder="Enter Vaccination Status" [(ngModel)]="model.vaccinationStatus"></textarea>
+  </div>
+  <div class="form-group mt-2">
+    <label for="personalityTraits">Personalitate</label>
+    <textarea class="form-control" id="personalityTraits" name="personalityTraits" placeholder="Enter Personality Traits" [(ngModel)]="model.personalityTraits"></textarea>
+  </div>
+  <div class="form-group mt-2 mb-2">
+    <label for="adopted">Status Adoptie</label>
+    <select class="form-control" id="adopted" name="adopted" [(ngModel)]="model.adopted">
+      <option value="true">Da</option>
+      <option value="false">Nu</option>
+    </select>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
