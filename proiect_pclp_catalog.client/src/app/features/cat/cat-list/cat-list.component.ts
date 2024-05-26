@@ -27,12 +27,16 @@ export class CatListComponent implements OnInit {
     )
   }
 
+  viewCat(catId: number) {
+    this.router.navigate(['categories/cat/v/' + catId]);
+  }
+
   editionCat(catId: number) {
     this.router.navigate(['categories/cat/update/' + catId]);
   }
 
   deleteCat(catId: number) {
-    let i = confirm('Are you sure you are willing to delete the cat with the ID: ' + catId);
+    let i = confirm('Ești sigur că vrei să ștergi pisica cu ID-ul: ' + catId);
     if (i) {
       this.http.delete('https://localhost:7143/api/cat/' + catId).subscribe({
         next: (response) => {

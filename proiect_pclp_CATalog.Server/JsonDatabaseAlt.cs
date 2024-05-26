@@ -127,6 +127,22 @@ namespace proiect_pclp_CATalog.Server
             return default;
         }
 
+        public T GetElementByItem(T item, string propertyName)
+        {
+            lock (_lock)
+            {
+                List<T> items = GetAllObj();
+                T existingItem = items.FirstOrDefault(eitem => GetItem(eitem, propertyName) == GetItem(item, propertyName));
+                if (existingItem != null)
+                {
+                    return (T)existingItem;
+                }
+
+                return default;
+            }
+        }
+
+
         private int GetId(T item)
         {
             var info = typeof(T).GetProperty("Id");
@@ -155,6 +171,12 @@ namespace proiect_pclp_CATalog.Server
         {
             var info = typeof(T).GetProperty("Password");
             info.SetValue(item, value);
+        }
+
+        private string GetItem(T item, string propertyName)
+        {
+            var info = typeof(T).GetProperty(propertyName);
+            return (string)info.GetValue(item);
         }
 
     }

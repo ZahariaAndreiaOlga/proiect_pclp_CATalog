@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 export class UserListComponent implements OnInit {
 
   public userList: UserModel[] = [];
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) { }
 
 
   ngOnInit() {
@@ -32,7 +32,7 @@ export class UserListComponent implements OnInit {
   }
 
   deleteUser(userId: number) {
-    let i = confirm('Are you sure you are willing to delete the user with the ID: ' + userId);
+    let i = confirm('Ești sigur că vrei să ștergi utilizatorul cu ID-ul: ' + userId);
     if (i) {
       this.http.delete('https://localhost:7143/api/user/' + userId).subscribe({
         next: (response) => {

@@ -1,3 +1,5 @@
+import { AppointmentModel } from "./appointment.model";
+
 export interface CatModel {
   id?: number;
   name: string;
@@ -9,6 +11,8 @@ export interface CatModel {
   vaccinationStatus: string;
   personalityTraits: string;
   adopted: boolean;
+  foster?: string;
   creationDate?: string;
   updatedDate?: string;
+  appointment?: AppointmentModel[];
 }

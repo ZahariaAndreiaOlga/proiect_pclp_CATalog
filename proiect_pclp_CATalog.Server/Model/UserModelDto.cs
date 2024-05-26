@@ -7,6 +7,7 @@ namespace proiect_pclp_CATalog.Server.Model
         public string Login { get; set; }
         public string? ShelterName { get; set; }
         public string Role { get; set; }
+        public List<AppointmentModel>? Appointment { get; set; }
 
     }
 }

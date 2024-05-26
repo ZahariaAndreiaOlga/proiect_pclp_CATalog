@@ -1,0 +1,71 @@
+<section class="py-2 container">
+  <div class="row py-lg-2">
+    <div class="row">
+      <h1 class="fw-light">Nume pisica: {{ model.name }}</h1>
+    </div>
+    <div class="row">
+      <div class="col-4">
+        <img src="{{ model.picture }}" class="img-fluid rounded" alt="Poza cu {{ model.name }}">
+      </div>
+      <div class="col-6">
+        <p class="fs-4 fw-light">Nume: {{ model.name }}</p> <br>
+        <p class="fs-4 fw-light">Rasa: {{ model.breed }} </p><br>
+        <p class="fs-4 fw-light">Varsta: {{ model.age }} ani</p><br>
+        <p class="fs-4 fw-light">Personalitate: {{ model.personalityTraits }} </p><br>
+      </div>
+    </div>
+    <div class="row mt-2">
+      <div class="btn-group">
+        <button *ngIf="auth.loggedIn && catId !== null" type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#appointmentModal">Programează-te</button>
+        <button *ngIf="auth.loggedIn && catId !== null && auth.isAbleToPost" type="button" class="btn btn-sm btn-outline-secondary" (click)="editionCat(catId)">Editare</button>
+        <button *ngIf="auth.loggedIn && catId !== null && auth.isAbleToPost" type="button" class="btn btn-sm btn-outline-secondary" (click)="deleteCat(catId)">Stergere</button>
+      </div>
+    </div>
+    </div>
+</section>
+
+<div *ngIf="auth.loggedIn" class="py-5 bg-body-tertiary">
+  <div class="container">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th class="text-center" colspan="4">Programare</th>
+          </tr>
+          <tr>
+            <th scope="col">#</th>
+            <th colspan="3">Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cat of model.appointment">
+            <th scope="row">{{ cat.id }}</th>
+            <td colspan="3">{{ cat.appointmentDate }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="appointmentModal" tabindex="-1" aria-labelledby="appointmentModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="appointmentModalLabel">Programare</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form #form="ngForm" (ngSubmit)="onFormSubmit()">
+          <div class="form-group mt-2 mb-2">
+            <label for="appointment">Date</label>
+            <input type="date" class="form-control" id="appointment" name="appointment" [(ngModel)]="appointmentDate">
+          </div>
+          <button type="submit" class="btn btn-primary">Logare</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

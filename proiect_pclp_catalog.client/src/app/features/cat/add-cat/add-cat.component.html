@@ -35,12 +35,16 @@
     <label for="personalityTraits">Personalitate</label>
     <textarea class="form-control" id="personalityTraits" name="personalityTraits" placeholder="Enter Personality Traits" [(ngModel)]="model.personalityTraits"></textarea>
   </div>
-  <div class="form-group mt-2 mb-2">
+  <div class="form-group mt-2">
     <label for="adopted">Status Adoptie</label>
     <select class="form-control" id="adopted" name="adopted" [(ngModel)]="model.adopted">
-      <option value="true">Da</option>
-      <option value="false">Nu</option>
+      <option [ngValue]="true">Da</option>
+      <option [ngValue]="false">Nu</option>
     </select>
+  </div>
+  <div class="form-group mt-2 mb-2">
+    <label for="foster">Foster</label>
+    <input type="text" class="form-control" id="foster" name="foster" placeholder="Enter Foster Name" [(ngModel)]="model.foster" />
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>

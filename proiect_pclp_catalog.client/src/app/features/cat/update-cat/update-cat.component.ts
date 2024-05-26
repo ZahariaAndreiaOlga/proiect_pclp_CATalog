@@ -11,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 export class UpdateCatComponent implements OnInit {
 
   model: CatModel;
-  catId: string|null;
+  catId: string | null;
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router) {
 
@@ -44,7 +44,7 @@ export class UpdateCatComponent implements OnInit {
 
   onFormSubmit() {
     console.log(this.model);
-    this.http.put<void>('https://localhost:7143/api/cat/'+ this.catId, this.model).subscribe({
+    this.http.put<void>('https://localhost:7143/api/cat/' + this.catId, this.model).subscribe({
       next: (response) => {
         console.log('success');
         this.router.navigate(['categories/cat']);

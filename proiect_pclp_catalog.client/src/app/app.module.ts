@@ -19,6 +19,11 @@ import { AuthGuard } from './auth/auth.guard';
 import { UpdateCatComponent } from './features/cat/update-cat/update-cat.component';
 import { UpdateUserComponent } from './features/user/update-user/update-user.component';
 import { MainComponent } from './features/main/main.component';
+import { UnauthorizedComponent } from './features/unauthorized/unauthorized.component';
+import { SignupComponent } from './features/signup/signup.component';
+import { ViewCatComponent } from './features/cat/view-cat/view-cat.component';
+import { UserAppointmentComponent } from './features/appointment/user/user-appointment.component';
+import { ListAppointmentComponent } from './features/appointment/admin/list-appointment.component';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -35,7 +40,12 @@ export function tokenGetter() {
     UpdateCatComponent,
     UpdateUserComponent,
     LoginComponent,
-    MainComponent
+    MainComponent,
+    UnauthorizedComponent,
+    SignupComponent,
+    ViewCatComponent,
+    UserAppointmentComponent,
+    ListAppointmentComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,

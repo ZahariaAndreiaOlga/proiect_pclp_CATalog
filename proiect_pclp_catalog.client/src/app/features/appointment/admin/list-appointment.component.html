@@ -1,0 +1,38 @@
+<section class="py-5 text-center container">
+  <div class="row py-lg-5">
+    <div class="col-lg-6 col-md-8 mx-auto">
+      <h1 class="fw-light">Listă de programări</h1>
+    </div>
+  </div>
+</section>
+
+<p *ngIf="!ListAppointment"> Loading...</p>
+
+<div *ngIf="ListAppointment">
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Date</th>
+        <th scope="col">Utilizator ID</th>
+        <th scope="col">Pisică</th>
+        <th scope="col">Optiuni</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let appointment of ListAppointment">
+        <th scope="row">{{ appointment.id }}</th>
+        <td>{{ appointment.appointmentDate }}</td>
+        <td>{{ appointment.idUser }}</td>
+        <td>
+          <button *ngIf="appointment.id !== undefined" type="button" class="btn btn-sm btn-outline-primary" (click)="viewCat(appointment.idCat)" >Vizualizare</button>
+        </td>
+        <td>
+          <button *ngIf="appointment.id !== undefined" type="button" class="btn btn-sm btn-outline-danger" (click)="deleteAppointment(appointment.id)" >Stergere</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>

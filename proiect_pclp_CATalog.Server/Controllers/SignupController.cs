@@ -1,7 +1,7 @@
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using proiect_pclp_CATalog.Server.Model;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -13,38 +13,57 @@ namespace proiect_pclp_CATalog.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class LoginController : ControllerBase
+    public class SignupController : ControllerBase
     {
 
         private IConfiguration _configuration;
         private JsonDatabaseAlt<UserModel> db;
 
-        public LoginController(IConfiguration configuration)
+        public SignupController(IConfiguration configuration)
         {
             this._configuration = configuration;
-            this.db = new JsonDatabaseAlt<UserModel>("/db/User_database.json");
+            this.db = this.db = new JsonDatabaseAlt<UserModel>("/db/User_database.json");
         }
 
-        // POST: api/<LoginController>
+
+
+        // POST api/<SignupController>
         [HttpPost]
-        [AllowAnonymous]
-        public IActionResult Login([FromBody] UserLoginModel userLoginModel)
+        public IActionResult Post([FromBody] UserLoginModel userLoginModel)
         {
 
-            UserModel user = Authenticate(userLoginModel);
+            UserModel user = new UserModel();
 
-            if (user != null)
+            user.Login = userLoginModel.Login;
+
+            string passwordHash = BCrypt.Net.BCrypt.EnhancedHashPassword(userLoginModel.Password, 13);
+            user.Password = passwordHash;
+
+            user.ShelterName = "null";
+            user.Role = "User";
+
+            UserModel u = db.GetElementByItem(user, "Login");
+
+            if (u == null)
             {
-                string token = Generate(user);
-                var data = new
+                db.PostByObjt(user);
+
+                
+
+                if (user != null)
                 {
-                    token = token
-                };
-                var json = JsonConvert.SerializeObject(data);
-                return Ok(json);
+                    string token = Generate(user);
+                    var data = new
+                    {
+                        token = token
+                    };
+                    var json = JsonConvert.SerializeObject(data);
+                    return Ok(json);
+                }
             }
 
             return NotFound();
+
         }
 
         private UserModel Authenticate(UserLoginModel userLoginModel)
@@ -83,5 +102,7 @@ namespace proiect_pclp_CATalog.Server.Controllers
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
+
+
     }
 }

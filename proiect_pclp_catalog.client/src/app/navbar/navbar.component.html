@@ -1,5 +1,5 @@
 <div class="d-flex flex-column flex-shrink-0 p-3">
-  <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+  <a [routerLink]="['']" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
     <span class="fs-4">CATalog</span>
   </a>
   <hr>
@@ -9,25 +9,30 @@
         Pisica
       </a>
     </li>
-    <li *ngIf="auth.loggedIn">
+    <li *ngIf="auth.loggedIn && auth.isAdmin">
       <a [routerLink]="['categories/user']" [routerLinkActiveOptions]="{ exact: true }" class="nav-link link-body-emphasis" routerLinkActive="active">
         Utilizator
       </a>
     </li>
-    <li>
-      <a href="#" class="nav-link link-body-emphasis" routerLinkActive="active">
-        Despre
+    <li *ngIf="auth.loggedIn && !auth.isAbleToPost">
+      <a [routerLink]="['categories/user/appointment']" [routerLinkActiveOptions]="{ exact: true }" class="nav-link link-body-emphasis" routerLinkActive="active">
+        Programarea mea
+      </a>
+    </li>
+    <li *ngIf="auth.loggedIn && auth.isAdmin">
+      <a [routerLink]="['categories/admin/appointment']" [routerLinkActiveOptions]="{ exact: true }" class="nav-link link-body-emphasis" routerLinkActive="active">
+        Programarea mea
       </a>
     </li>
   </ul>
-  <hr>
+  <hr *ngIf="auth.loggedIn && auth.isAbleToPost">
   <ul class="nav nav-pills flex-column mb-auto">
-    <li *ngIf="auth.loggedIn">
+    <li *ngIf="auth.loggedIn && auth.isAbleToPost">
       <a [routerLink]="['categories/cat/add/']" [routerLinkActiveOptions]="{ exact: true }" class="nav-link link-body-emphasis" routerLinkActive="active">
         Adauga pisica
       </a>
     </li>
-    <li *ngIf="auth.loggedIn">
+    <li *ngIf="auth.loggedIn && auth.isAdmin">
       <a [routerLink]="['categories/user/add']" [routerLinkActiveOptions]="{ exact: true }" class="nav-link link-body-emphasis" routerLinkActive="active">
         Adauga utilizator
       </a>

@@ -13,9 +13,11 @@ namespace proiect_pclp_CATalog.Server.Controllers
     public class UserController : ControllerBase
     {
         private JsonDatabaseAlt<UserModel> db;
+        private JsonDatabaseAlt<AppointmentModel> dbAppointment;
         public UserController()
         {
             this.db = new JsonDatabaseAlt<UserModel>("/db/User_database.json");
+            this.dbAppointment = new JsonDatabaseAlt<AppointmentModel>("/db/Cat_appointment_database.json");
         }
 
         // GET: api/<UserController>
@@ -38,12 +40,16 @@ namespace proiect_pclp_CATalog.Server.Controllers
         {
             UserModel myUser = db.GetObjtById(id);
 
+            List<AppointmentModel> appointmentList = dbAppointment.GetAllObj();
+            List<AppointmentModel> catAppointmentList = appointmentList.Where(appointment => appointment.IdUser == id).ToList();
+
             return new UserModelDto
             {
                 Id = id,
                 Login = myUser.Login,
                 ShelterName = myUser.ShelterName,
-                Role = myUser.Role
+                Role = myUser.Role,
+                Appointment = catAppointmentList
             };
         }
 

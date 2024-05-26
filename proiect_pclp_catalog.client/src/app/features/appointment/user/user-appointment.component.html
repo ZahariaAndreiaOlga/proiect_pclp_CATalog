@@ -1,0 +1,44 @@
+<section class="py-5 text-center container">
+  <div class="row py-lg-5">
+    <div class="col-lg-6 col-md-8 mx-auto">
+      <h1 class="fw-light">Login : {{ model.login }}</h1>
+      <p class="lead text-body-secondary">
+        Informațiile tale
+      </p>
+    </div>
+  </div>
+</section>
+
+<div *ngIf="auth.loggedIn" class="py-5 bg-body-tertiary">
+  <div class="container">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th class="text-center" colspan="5">Programare</th>
+          </tr>
+          <tr>
+            <th scope="col">#</th>
+            <th colspan="2">Date</th>
+            <th scope="col">Pisică</th>
+            <th scope="col">Șterge</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let appointment of model.appointment">
+            <th scope="row">{{ appointment.id }}</th>
+            <td colspan="2">{{ appointment.appointmentDate }}</td>
+            <td>
+              <button *ngIf="appointment.id !== undefined" type="button" class="btn btn-sm btn-outline-primary" (click)="viewCat(appointment.idCat)">Vizualizare</button>
+            </td>
+            <td>
+              <button *ngIf="appointment.id !== undefined" type="button" class="btn btn-sm btn-outline-danger" (click)="deleteAppointment(appointment.id)">Stergere</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>

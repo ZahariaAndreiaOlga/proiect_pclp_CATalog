@@ -43,8 +43,9 @@ if (app.Environment.IsDevelopment())
 string path = Directory.GetCurrentDirectory() + "/db"; // Folder
 string pathCat = path + "/Cat_database.json"; // Cat File
 string pathUser = path + "/User_database.json"; // User File
+string pathAppointment = path + "/Cat_appointment_database.json"; // Appointment File
 
-if (!File.Exists(pathCat) || !File.Exists(pathUser)) //db (database-creaza fisierele)
+if (!File.Exists(pathCat) || !File.Exists(pathUser) || !File.Exists(pathAppointment)) //db (database-creaza fisierele)
 {
     try
     {
@@ -63,6 +64,13 @@ if (!File.Exists(pathCat) || !File.Exists(pathUser)) //db (database-creaza fisie
         if (!File.Exists(pathUser))
         {
             StreamWriter writeUser = new StreamWriter(path + "/User_database.json");
+            writeUser.WriteLine("[]");
+            writeUser.Close();
+        }
+
+        if (!File.Exists(pathAppointment))
+        {
+            StreamWriter writeUser = new StreamWriter(path + "/Cat_appointment_database.json");
             writeUser.WriteLine("[]");
             writeUser.Close();
         }
